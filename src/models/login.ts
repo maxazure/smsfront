@@ -70,6 +70,7 @@ const Model: LoginModelType = {
       // redirect
       if (window.location.pathname !== '/user/login' && !redirect) {
         sessionStorage.removeItem('token')
+        localStorage.removeItem('antd-pro-authority')
         yield put(
           routerRedux.replace({
             pathname: '/user/login',
@@ -84,6 +85,7 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
+      console.log(payload)
       setAuthority(payload.currentAuthority);
       return {
         ...state,

@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Radio, Select} from 'antd';
+import { Form, Input, Modal, Radio, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import React from 'react';
 import OptionWeb from '@/pages/management/users/components/OptionWeb';
@@ -8,16 +8,16 @@ const FormItem = Form.Item;
 
 interface CreateFormProps extends FormComponentProps {
   modalVisible: boolean;
-  handleAdd: (fieldsValue: { 
-    fullname: string, mobile: string, email: string, 
+  handleAdd: (fieldsValue: {
+    fullname: string, mobile: string, email: string,
     password: string, password_confirmation: string,
     role_id: string, company_id: string
-   }) => void;
+  }) => void;
   handleModalVisible: () => void;
 }
 const CreateForm: React.FC<CreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
- 
+
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -39,15 +39,15 @@ const CreateForm: React.FC<CreateFormProps> = props => {
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-       <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Fullname">
+      <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Fullname">
         {form.getFieldDecorator('fullname', {
-          rules: [{ required: true, message: 'Fullname is required.'}],
+          rules: [{ required: true, message: 'Fullname is required.' }],
         })(<Input placeholder="Name" />)}
       </FormItem>
 
       <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Mobile">
         {form.getFieldDecorator('mobile', {
-          rules: [{ required: true, message: 'mobile is required.'}],
+          rules: [{ required: true, message: 'mobile is required.' }],
         })(<Input placeholder="mobile" />)}
       </FormItem>
 
@@ -66,44 +66,44 @@ const CreateForm: React.FC<CreateFormProps> = props => {
       </FormItem>
 
       <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 10 }} label="Password" hasFeedback>
-          {form.getFieldDecorator('password', {
-            rules: [
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-              {
-                min: 6,
-                message: 'Please input more than 6 chars!',
-              }
-            ],
-          })(<Input.Password />)}
-        </Form.Item>
+        {form.getFieldDecorator('password', {
+          rules: [
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+            {
+              min: 6,
+              message: 'Please input more than 6 chars!',
+            }
+          ],
+        })(<Input.Password />)}
+      </Form.Item>
 
 
-        <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Role">
+      <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Role">
         {form.getFieldDecorator('role_id', {
-            rules: [{ required: true, message: 'Please select your role' }],
-            initialValue: "3"
-          })(
-            <Radio.Group>
-              <Radio.Button value="1">Admin</Radio.Button>
-              <Radio.Button value="2">Company Admin</Radio.Button>
-              <Radio.Button value="3">User</Radio.Button>
-            </Radio.Group>
-            )}
-          </Form.Item>
+          rules: [{ required: true, message: 'Please select your role' }],
+          initialValue: "3"
+        })(
+          <Radio.Group>
+            <Radio.Button value="1">Admin</Radio.Button>
+            <Radio.Button value="2">Company Admin</Radio.Button>
+            <Radio.Button value="3">User</Radio.Button>
+          </Radio.Group>
+        )}
+      </Form.Item>
 
-          <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Company">
-          {form.getFieldDecorator('company_id', {
-            rules: [{ required: true, message: 'Please select your company' }],
-          })(
-            <OptionWeb path="/api/companies" />
-          )}
-        </Form.Item>
+      <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="Company">
+        {form.getFieldDecorator('company_id', {
+          rules: [{ required: true, message: 'Please select your company' }],
+        })(
+          <OptionWeb path="/api/companies" />
+        )}
+      </Form.Item>
 
-        
-    
+
+
 
     </Modal>
   );

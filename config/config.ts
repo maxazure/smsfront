@@ -88,7 +88,8 @@ export default {
         {
           path: '/',
           component: '../layouts/BasicLayout',
-          authority: ['admin', 'user'],
+          Routes: ['src/pages/Authorized'],
+          authority: ['admin', 'company_admin', 'user'],
           routes: [
             {
               path: '/',
@@ -155,24 +156,29 @@ export default {
               path: '/member',
               icon: 'team',
               component: './member',
+              authority: ['admin', 'company_admin'],
             },
             {
               path: '/member/create',
               component: './member/create',
+              authority: ['admin', 'company_admin'],
             },
             {
               path: '/member/edit',
               component: './member/edit',
+              authority: ['admin', 'company_admin'],
             },
             {
               name: 'management',
               path: '/management',
+              authority: ['admin'],
               icon: 'file',
               routes: [
                 {
                   name: 'users',
                   path: '/management/users',
                   component: './management/users',
+                  authority: ['admin'],
                   icon: 'file',
                 },
                 {
@@ -284,6 +290,7 @@ export default {
   chainWebpack: webpackPlugin,
   proxy: {
     '/api/': {
+      // target: 'http://localhost:3000/api/v1/',
       target: 'http://www.texting.co.nz/api/',
       changeOrigin: true,
       pathRewrite: {

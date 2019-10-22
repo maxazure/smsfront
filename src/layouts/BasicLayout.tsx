@@ -18,7 +18,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 
 export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
@@ -36,6 +36,9 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 /**
  * use Authorized check all menu item
  */
+
+// const menuDataRender = { () => menuData}
+
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map(item => {
     const localItem = {
@@ -68,6 +71,142 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    */
 
   useEffect(() => {
+
+    const menuData = [
+      {
+        path: '/',
+        redirect: '/dashboard',
+      },
+      {
+        name: 'dashboard',
+        path: '/dashboard',
+        icon: 'smile',
+        component: './dashboard',
+      },
+      {
+        name: 'upload-data',
+        path: '/upload-data',
+        icon: 'upload',
+        component: './uploaddata',
+      },
+      {
+        name: 'appointment',
+        path: '/appointment',
+        icon: 'calendar',
+        component: './appointment',
+      },
+      {
+        path: '/appointment/create',
+        component: './appointment/create',
+      },
+      {
+        path: '/appointment/edit',
+        component: './appointment/edit',
+      },
+      {
+        name: 'sending-a-sms',
+        path: '/sendingsms',
+        icon: 'mail',
+        component: './sendingsms',
+      },
+      {
+        name: 'batch-sending',
+        path: '/batch-sending',
+        icon: 'table',
+        component: './batchsending',
+      },
+      {
+        name: 'sms',
+        path: '/sm',
+        icon: 'inbox',
+        component: './sm',
+      },
+      {
+        name: 'setting',
+        path: '/setting',
+        icon: 'setting',
+        component: './setting',
+      },
+      {
+        name: 'usertemplate',
+        path: '/template',
+        icon: 'switcher',
+        component: './usertemplate',
+      },
+      {
+        name: 'members',
+        path: '/member',
+        icon: 'team',
+        component: './member',
+      },
+      {
+        path: '/member/create',
+        component: './member/create',
+      },
+      {
+        path: '/member/edit',
+        component: './member/edit',
+      },
+      {
+        name: 'management',
+        path: '/management',
+        icon: 'file',
+        routes: [
+          {
+            name: 'users',
+            path: '/management/users',
+            component: './management/users',
+            icon: 'file',
+          },
+          {
+            name: 'template',
+            path: '/management/template',
+            icon: 'file',
+            component: './management/template',
+          },
+          {
+            path: '/management/template/create',
+            component: './management/template/create',
+          },
+          {
+            path: '/management/template/edit',
+            component: './management/template/edit',
+          },
+          {
+            name: 'company',
+            path: '/management/company',
+            icon: 'file',
+            component: './management/company',
+          },
+          {
+            path: '/management/company/create',
+            component: './management/company/create',
+          },
+          {
+            path: '/management/company/edit',
+            component: './management/company/edit',
+          },
+          {
+            name: 'role',
+            path: '/management/role',
+            icon: 'file',
+            component: './management/role',
+          },
+          {
+            path: '/management/role/create',
+            component: './management/role/create',
+          },
+          {
+            path: '/management/role/edit',
+            component: './management/role/edit',
+          },
+        ],
+      },
+
+      {
+        component: './404',
+      },
+    ]
     if (dispatch) {
       dispatch({
         type: 'user/fetchCurrent',
@@ -90,10 +229,14 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   };
 
+
+
   return (
     <ProLayout
       logo={logo}
       onCollapse={handleMenuCollapse}
+
+
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl) {
           return defaultDom;

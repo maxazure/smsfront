@@ -22,11 +22,11 @@ import styles from './style.less';
 class MemberList extends Component {
   columns = [
     { title: 'Id', dataIndex: 'id' },
-{ title: 'Fullname', dataIndex: 'fullname' },
-{ title: 'Mobile', dataIndex: 'mobile' },
-{ title: 'Email', dataIndex: 'email' },
-{ title: 'Updated At', dataIndex: 'updated_at', render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>},
-
+    { title: 'Fullname', dataIndex: 'fullname' },
+    { title: 'Mobile', dataIndex: 'mobile' },
+    { title: 'Email', dataIndex: 'email' },
+    { title: 'Role', dataIndex: 'role' },
+    { title: 'Updated At', dataIndex: 'updated_at', render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span> },
     {
       title: 'Action',
       render: (_text, record) => (<Fragment>
@@ -48,6 +48,11 @@ class MemberList extends Component {
     }
 
     dispatch({ type: 'member/fetch', payload: params });
+  }
+
+  getRoles = i => {
+    const roles = { 1: 'Admin', 2: 'Company Admin', 3: 'User' };
+    return roles[i]
   }
 
   handleTableChange = pagination => {
